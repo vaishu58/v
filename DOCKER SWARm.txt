@@ -1,0 +1,48 @@
+DOCKER SWARm
+
+connect three nodes
+1 manager and 2and3 workernodes
+cd Desktop/KEYPAIR/
+sudo -i
+yum update -y
+yum install docker -y in three instances
+systemctl start docker.service
+systemctl status docker.service
+stop multiexecution mode
+these steps are in master node
+docker swarm init --advertise-addr privateip of main node
+docker node ls
+copy the token and paste worker nodes
+docker node ls
+docker swarm leave on worker node1
+docker node ls
+docker node rm id 
+docker swarm leave --force on worker node
+docker swarm leave --force in manager node
+docker swarm init --advertise-addr privateip of main node
+docker swarm join-token manager
+docker swarm join-token worker
+docker service create --name swiggy --replicas 3 --publish 80:80 httpd
+docker service ls
+docker ps -a
+copy public ip paste in browser
+docker stop container id in worker node
+docker ps -a
+docker service ps swiggy on manager node
+docker service rm swiggy
+docker service create --name zomato --replicas 5 --publish 80:80 nginx
+docker service ps zomato
+docker service create --name uber --replicas 5 --publish 81:80 nginx
+docker service ps uber
+docker service ls
+docker service inspect uber
+docker service logs uber
+docker service scale uber=7
+docker service ps uber
+docker service rollback uber
+
+
+
+
+
+

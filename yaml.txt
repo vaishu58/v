@@ -1,0 +1,25 @@
+ansible all -ba "touch file1"
+ansible all -ba "yum remove httpd -y"
+ansible all -b -m yum -a "pkg=httpd state=present"
+ansible all -b -m yum -a "pkg=httpd state=latest"
+ansible all -b -m yum -a "pkg=httpd state=absent"
+ansible all -b -m service -a "name=httpd state=started"
+ansible all -b -m user -a "name=devops state=present"
+cat /etc/passwd
+ansible all -b -m user -a "name=devops state=absent"
+cat>nagesh
+hi welcome to class
+ansible all -b -m copy -a "src=nagesh dest=/tmp/nagesh"
+ls /tmp/
+cat /tmp/nagesh
+rm -rf *
+vim task.yml
+ansible-playbook task.yml
+cat task.yml
+:%s/present/absent/ after
+press enter
+ansible-playbook task.yml --extra-vars "a=tree b=git"
+ansible-playbook task.yml
+ansible all -ba "yum remove httpd -y"
+ansible all -ba "systemctl status httpd"
+ansible all -ba "yum remove httpd -y"

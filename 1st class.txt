@@ -1,0 +1,25 @@
+sudo yum install -y yum-utils shadow-utils
+sudo yum-config-manager --add-repo https://rpm.releases.hashicorp.com/AmazonLinux/hashicorp.repo
+sudo yum -y install terraform
+terraform version
+mkdir terraform
+cd terraform/
+vim main.tf
+cd
+aws configure
+cd terraform/
+cat main.tf
+terraform init
+terraform plan
+terraform apply
+yes
+terraform destroy
+yes
+vi main.tf
+terraform apply
+terraform destroy
+vi main.tf
+terraform apply --auto-approve
+terraform destroy --auto-approve
+vi main.tf
+ll

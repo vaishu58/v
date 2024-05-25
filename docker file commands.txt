@@ -1,0 +1,73 @@
+FROM : For base image this command must be on top of the file
+RUN : To execute commands, it will create a layer in the file 
+COPY : Copy files from local system (docker VM) where need to provide source and destination
+ADD : It can download files from the internet and also,we can extract files at docker image side
+EXPOSE : To expose ports such as 8080 for tomcat and port number nginx etc.
+WORKDIR : To set working directory for the container
+CMD : Excutes commands but during container.
+ENTRYPOINT : Higher priority than CMD, because the first command will be executed by Entry point only
+ENV : Environment Variables
+ARG : Defines a variable that can be used to build a Docker Image
+
+sudo -i
+yum update -y
+yum install docker -y && systemctl restart docker
+systemctl status docker
+docker version
+vi Dockerfile
+FROM ubuntu
+RUN touch aws azure gcp
+docker build -t image1 .
+ll
+docker images
+docker run -it --name cont1 image1
+ll
+exit
+FROM ubuntu
+RUN mkdir devops
+RUN echo "this is linux file">/devops/linux
+docker build -t image2 .
+docker images
+docker run -it --name cont2 image2 /bin/bash
+ll
+cd devops/
+ll
+cat linux
+exit
+vim Dockerfile
+FROM ubuntu
+RUN mkdir java
+WORKDIR java
+RUN echo "this is python file">/java/python
+COPY aws /java/
+ADD php.tar.gz /java/
+docker build -t image3 .
+touch aws
+touch php.tar.gz
+docker build -t image3 .
+docker run -it --name cont3 image3
+ll
+docker start cont3 && docker attach cont3
+cat /etc/os-release
+cd /var/www/html/
+ll
+vim index.html
+<h1> this is my website </h1>
+<h2> developed by agasthya solutions </h2>
+cd -
+vim Dockerfile
+FROM ubuntu
+RUN apt-get update
+RUN apt-get install apache2 -y
+COPY index.html /var/www/html/
+CMD ["/usr/sbin/apachectl", "-D", "FOREGROUND"]
+vim index.html
+docker build -t image4
+docker run -dit -p 8083:80 image4
+docker ps -a
+
+
+
+
+
+

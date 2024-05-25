@@ -1,0 +1,63 @@
+docker pull centos
+docker run -itd --name web1 centos
+docker exec -it web1 /bin/bash
+ping google.com
+vi newfile.txt
+cat newfile.txt
+docker pull ubutu
+docker run -itd --name web2 ubuntu
+docker exec -it web2 /bin/bash
+vi secondfile.txt
+cat
+ping google.com
+exit
+vi Docker file
+FROM : ubuntu:latest
+RUN apt update -y
+RUN apt install net-tools 
+RUN apt install nano -y
+CMD ["/bin/bash"]
+docker build -t custom_ubuntu .
+docker run -itd --name custom_u_web01 custom_ubuntu
+docker exec -it con2 /bin/bash
+exit
+
+FROM ubuntu 
+RUN apt update 
+RUN apt install –y apache2 
+RUN apt install –y apache2-utils 
+RUN apt clean 
+EXPOSE 80
+CMD [“apache2ctl”, “-D”, “FOREGROUND”]
+docker build -t apache_img .
+docker run --name myapache -d -p 60:80 apache_img
+
+
+apt install default-jre
+java -version
+apt update
+apt install nginx
+systemctl start nginx
+systemctl status nginx
+git clone project
+cd mavenfolder
+apt install maven
+mvn install
+ll
+cd target/
+ls
+mvn spring-boot:run
+copy public ip port 8080
+
+vi Dockerfile
+FROM maven:3.8.4-openjdk-11
+WORKDIR /app
+COPY pom.xml .
+RUN mvn dependency:go-offline
+COPY src ./src
+RUN mvn package
+CMD ["java","-jar","target/bmi-1.0.jar"]
+EXPOSE 8000
+docker build -t my-mvn-app .
+docker run -itd --name mvn-app-cont03 -p 8080:8000 my-mvn-app:1.0
+docker logs mvn-app-cont03

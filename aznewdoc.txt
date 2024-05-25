@@ -1,0 +1,29 @@
+day3
+ping google.com
+docker exec -it web1 ping google.com
+docker exec -it srv01 ls -ltr
+ping web01
+ping ip container1
+ping ip container2
+docker network inspect bridge
+docker network create my-bridge1 --driver bridge
+docker network ls
+docker network inspect bridge | grep -i "subnet"
+docker network inspect my-bridge1 | grep -i "subnet"
+docker network create my-bridge2 --driver bridge
+docker network inspect my-bridge2 | grep -i "subnet"
+docker run -itd --name web100 --network=my-bridge1 nginx
+docker run -itd --name web200 --network=my-bridge1 nginx
+docker run -itd --name web300 --network=my-bridge1 httpd
+docker exec -it web1 /bin/bash
+ping web2
+ping web3
+ping ip
+docker exec --it web100 /bin/bash
+docker network inspect host
+docker run -itd --name httpd02 --network=host httpd
+docker run -itd --name httpd04 --network=none httpd
+docker run -itd --name web100 centos
+
+172.17.0.3 web200
+172.17.0.2 web100

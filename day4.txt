@@ -1,0 +1,82 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+     - name: installing httpd in RedHat
+       command: yum install httpd -y
+       when: ansible_os_family == "RedHat"
+   
+     - name: installing httpd on ubuntu
+       command: apt install apache2 -y
+       when: ansible_os_family == "Debian"
+
+VAULT 
+
+
+vi creds
+user = Nagesh
+password = Nagesh
+cat creds
+ansible-vault create creds
+cat creds
+ansible-vault edit creds
+ansible-vault decrypt creds
+ansible-vault encrypt creds
+ansible-vault rekey creds
+
+
+ROLES
+
+mkdir -p playbooks/roles/
+tree
+yum install tree -y
+cd playbooks/
+ll
+vim master.yml
+---
+- hosts: dev
+  become: yes
+mkdir -p roles/git/tasks
+mkdir -p roles/docker/tasks
+mkdir -p roles/httpd/tasks
+tree
+vim roles/docker/tasks/main.yml
+- name: installing docker
+  command: yum install docker -y
+vim master.yml
+---
+- hosts: dev
+  become: yes
+  roles:
+     - git
+
+
+TAGS
+
+vi Nagesh.yml
+
+---
+- hosts: all
+  become: yes
+  tasks:
+     - name: installing git
+       command: yum install git -y
+       tags: a
+
+     - name: installing java
+       command: yum install java-1.8.0-openjdk -y 
+       tags: b
+
+     - name: installing maven
+       command : yum install maven -y
+       tags: c
+     
+     - name: installing docker
+       command: yum install docker -y
+       tags: d
+
+ansible-playbook Nagesh.yml --tags a,b
+ansible-playbook Nagesh.yml --tags c
+ansible-playbook Nagesh.yml --skip-tags "c"
+
+

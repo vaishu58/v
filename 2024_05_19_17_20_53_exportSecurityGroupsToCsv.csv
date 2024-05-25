@@ -1,0 +1,2 @@
+GroupId,GroupName,VpcId,Description,OwnerId,InboundRulesCount,OutboundRulesCount,Tags
+sg-04e1fbe33069c3b94,launch-wizard-1,vpc-0df9463a459e7691f,launch-wizard-1 created 2024-01-22T12:25:16.142Z,494943696355,3,1,

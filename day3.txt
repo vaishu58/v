@@ -1,0 +1,69 @@
+day3
+---
+HANDLERS
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: installing httpd
+      action: yum name=httpd state=present
+      notify: restart httpd
+
+
+  handlers:
+     - name: restart httpd
+       action: service name=httpd state=restarted
+ansible-playbook task.yml
+ansible all -ba "yum remove httpd -y"
+ansible all -ba "systemctl status httpd"
+
+
+LOOPS
+
+---
+- hosts: all
+  become: yes
+  tasks:
+     - name: installing packages
+       action: yum name='{{item}}' state=present
+       with_items:
+               - git
+               - maven
+               - tree
+               - docker
+               - httpd
+           ---
+- hosts: all
+  become: yes
+  tasks:
+     - name: useradd
+       action: user name='{{item}}' state=present
+       with_items:
+               - nagesh
+               - sai
+               - subbu
+               - mahesh
+               - kranthi
+
+ansible all -ba "yum remove docker git httpd tree maven"
+
+CONDITIONS
+
+---
+- hosts: all
+  become: yes
+  tasks:
+     - name: installing httpd in RedHat
+       command: yum install httpd -y
+       when: ansible_os_family == "RedHat"
+   
+     - name: installing httpd on ubuntu
+       command: apt install apache2 -y
+       when: ansible_os_family == "Debian"
+
+
+
+
+           
+
+

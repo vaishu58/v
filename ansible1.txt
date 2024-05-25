@@ -1,0 +1,34 @@
+launch 2 instances
+apt update
+amazon-linux-extras install ansible2 -y
+yum install git python python-pip python-level openssl -y
+apt install ansible
+sudo apt purge ansible ansible-core
+sudo apt install software-properties-common
+sudo add-apt-repository ppa:ansible/ansible --yes --update
+apt install ansible-core
+ssh-keygen
+cd .ssh/
+cat id_pub
+and launch node instance
+ssh-keygen
+~/ .ssh/
+copy pubkey in master and paste in authorizedkeys
+connect to node ssh privateip
+vi inventory
+copy private ip of node
+vim /etc/ansible/hosts
+ansible -m ping servers
+vim /etc/ansible/ansible.cfg
+remove yash sysmbol in ineventory and sudo user
+ansible all -a "touch file1"
+ansible all -a "ls"
+ansible all -a "useradd nagesh"
+ansible all -a "cat /etc/passwd"
+ansible all -ba "apt install tree -y"
+ansible all -ba "tree --version"
+ansible all -ba "apt remove tree -y"
+ansible all -m "shell" -a "touch devopsclass"
+
+
+

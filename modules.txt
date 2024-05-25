@@ -1,0 +1,44 @@
+modules
+
+ansible all -b -m yum -a "pkg=httpd state=present"
+ansible all -b -m yum -a "pkg=httpd state=started"
+ansible all -b -m yum -a "pkg=httpd state=absent"
+ansible all -b -m service -a "name=httpd state=started"
+ansible all -b -m user -a "name=devops state=present"
+ansible all -b -m copy -a "src=raham dest=/tmp/Nagesh"
+
+
+ansible playbooks
+vi task.yaml
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: installing git
+      action: yum name=git state=present
+ansible-playbook task.yml
+
+vi task.yml
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: installing git
+      action: yum name=git state=present
+    
+    - name: installing tree
+      action: yum name=tree state=present
+ansible-playbook task.yml
+%s/present/absent/
+
+---
+- hosts: all
+  become: yes
+  tasks:
+    - name: installing git
+      action: yum name='{{a}}' state=present
+    
+    - name: installing tree
+      action: yum name='{{b}}' state=present
+ansible-playbook task.yml --extra-vars "a=tree b=git"
+
